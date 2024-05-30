@@ -1,0 +1,47 @@
+<div class="register-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <h2 class="register-title">Register</h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" />
+      <mat-error
+        *ngIf="registerForm.errors?.['notMatching'] && registerForm.get('confirmPassword')!.touched"
+      >
+        Passwords do not match.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!registerForm.valid"
+      >
+        Register
+      </button>
+      <a class="login-link" href="/login">Already have account?</a>
+    </div>
+  </form>
+</div>

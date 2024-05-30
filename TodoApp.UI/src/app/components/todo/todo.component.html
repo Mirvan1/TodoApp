@@ -1,0 +1,55 @@
+<mat-toolbar>
+  <span>Todo App</span>
+  <span class="spacer"></span>
+
+  <button
+    (click)="logout()"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="todo-container">
+  <div class="todo-header">
+  <button mat-raised-button color="primary" (click)="openAddEditDialog()">
+    Add Todo
+  </button>
+  <h2 class="todo-user-content">{{authService.getFullName()}}'s Todos</h2>
+
+</div>
+  <mat-divider />
+  <div class="card-items" *ngIf="todos && todos.length > 0; else noTodosTemplate">
+    <mat-card *ngFor="let todo of todos" class="todo-item">
+      <mat-card-header
+        [ngClass]="{ 'passive-todo': isTodoActive(todo.DueDate, todo.Status) }"
+      >
+        <mat-card-title>{{ todo.Title }}</mat-card-title>
+        <mat-card-subtitle>{{ getStatusLabel(todo.Status) }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider class="card-divider" />
+
+      <mat-card-content>
+        <p class="longer-text">{{ todo.Description }}</p>
+        <p>Due Date: {{ todo.DueDate | date }}</p>
+      </mat-card-content>
+      <mat-divider />
+
+      <mat-card-actions align="end">
+        <button mat-button (click)="openAddEditDialog(todo)">Edit</button>
+        <button mat-button color="warn" (click)="openConfirmDialog(todo.Id!)">
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+ 
+
+  <ng-template #noTodosTemplate>
+    <div class="no-todos-message">
+      <p>You have no todos.</p>
+    </div>
+  </ng-template>
+</div>
