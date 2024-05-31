@@ -27,11 +27,9 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME
     host: process.env.DB_HOST,
     dialect: "postgres",
     port: process.env.DB_PORT,
+    protocol: 'postgres',
     dialectOptions: {
-        ssl: {
-            require: true, // This might still be necessary if you're connecting to a Heroku Postgres instance
-            rejectUnauthorized: false // Necessary if SSL is used
-        }
+        ssl: true
     }
 });
 
