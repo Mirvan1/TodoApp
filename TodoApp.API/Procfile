@@ -1,2 +1,3 @@
+npm install -g pg
 npm i
 web: node app.js
