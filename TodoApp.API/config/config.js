@@ -19,7 +19,7 @@ require('dotenv').config(); // Make sure to require dotenv to load the environme
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    dialect: process.env.DB_DIALECT,
+    dialect: 'postgres',
     dialectOptions: {
         ssl: {
             require: true, // This might still be necessary if you're connecting to a Heroku Postgres instance
