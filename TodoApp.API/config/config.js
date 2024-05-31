@@ -23,14 +23,23 @@ console.log("Sequelize configuration:", JSON.stringify({
     }
 }, null, 2));
 
-const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: "postgres",
-    port: process.env.DB_PORT,
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {
-        ssl: true
-    }
+        ssl: {
+            require: true,
+            rejectUnauthorized: false  // Necessary to avoid "self-signed certificate" errors
+        }
+    },
+    logging: true  // Optional: for debugging SQL queries
 });
+
+sequelize.authenticate()
+    .then(() => console.log('Connection has been established successfully.'))
+    .catch(err => console.error('Unable to connect to the database:', err));
+
+
+    
 
 module.exports = sequelize;
