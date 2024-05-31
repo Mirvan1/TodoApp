@@ -33,13 +33,13 @@ const authRoutes = require('./routes/authRoutes');
 
 const todoRoutes = require('./routes/todoRoutes');
 
-app.use(express.static(path.join(__dirname, 'dist/Todo-App.UI/browser/index.html')));
+app.use(express.static(path.join(__dirname, './dist/Todo-App.UI/browser/index.html')));
 
 app.use('/auth', authRoutes);
 app.use('/todo', todoRoutes);
 app.use(exceptionMiddleware); 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist/Todo-App.UI/browser/index.html'));
+    res.sendFile(path.join(__dirname, './dist/Todo-App.UI/browser/index.html'));
 });
 // Server configuration
 console.log(process.env.PORT)
