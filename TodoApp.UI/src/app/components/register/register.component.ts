@@ -61,7 +61,6 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
       const formRequest: RegisterRequest = {
         FirstName: this.registerForm.get('firstName')?.value,
         LastName: this.registerForm.get('lastName')?.value,

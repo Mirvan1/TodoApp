@@ -48,15 +48,13 @@ export class EditTodoComponent {
       Title: [data.todo?.Title || '', Validators.required],
       Description: [data.todo?.Description || ''],
       Status: [data.todo?.Status.toString() || '', Validators.required],
-      DueDate: [data.todo?.DueDate || ''],
+      DueDate: [data.todo?.DueDate || '',Validators.required],
       CreatedAt: [data.todo?.CreatedAt || ''],
     });
   }
 
   onSubmit(): void {
-    debugger;
     if (this.todoForm.valid) {
-      console.log('asfdsf');
       const formResult: Todo = {
         Title: this.todoForm.get('Title')?.value,
         Description: this.todoForm.get('Description')?.value,
@@ -64,7 +62,6 @@ export class EditTodoComponent {
         CreatedAt: new Date(),
         DueDate: this.todoForm.get('DueDate')?.value,
       };
-      console.log('asdfdsf', formResult);
       if (this.data.todo?.Id) {
         formResult.Id = this.data.todo?.Id;
         this.todoService.updateTodo(formResult).subscribe({

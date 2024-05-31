@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { Todo } from '../../models/todo.model';
 import { TodoService } from '../../services/todo.service';
 import { MatInputModule } from '@angular/material/input';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -31,6 +32,8 @@ import { Router } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 @Component({
   selector: 'app-todo',
   standalone: true,
@@ -50,14 +53,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatToolbarModule,
     MatDividerModule,
     MatCardModule,
+    MatButtonToggleModule
   ],
 
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
 })
-export class TodoComponent {
+export class TodoComponent{
   todos: Todo[] = [];
   currentDate: Date = new Date();
+  filterTodos = new FormControl('');
+  selectedFilter?: number=1;
   constructor(
     private todoService: TodoService,
     public dialog: MatDialog,
@@ -66,12 +72,14 @@ export class TodoComponent {
     private router: Router
   ) {}
 
+
   ngOnInit(): void {
     this.loadTodos();
   }
+ 
 
-  loadTodos(): void {
-    this.todoService.getAllTodos().subscribe({
+  loadTodos(status?:number): void {
+    this.todoService.getAllTodos(status).subscribe({
       next: (res) => {
         this.todos = res;
       },
@@ -92,24 +100,23 @@ export class TodoComponent {
     dialogRef.afterClosed().subscribe({
       next: (res: any) => {
         if (res) {
-          this.loadTodos();
+          this.loadTodos(this.selectedFilter);
         }
       },
       error: (err: any) => {},
     });
   }
 
-  openConfirmDialog(id: number): void {
+  openConfirmDialog(id?: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
-      height: 'auto',
       data: { message: 'Are you sure you want to delete this todo?' },
     });
 
     dialogRef.afterClosed().subscribe({
       next: (res: any) => {
-        if (res) {
-          this.todoService.deleteTodo(id).subscribe(() => this.loadTodos());
+        if (res && id) {
+          this.todoService.deleteTodo(id).subscribe(() => this.loadTodos(this.selectedFilter));
         }
       },
       error: () => {
@@ -140,5 +147,9 @@ export class TodoComponent {
       3: 'Done',
     };
     return statusLabels[status] || 'Unknown';
+  }
+
+  onFilterChange($e:any){
+    this.loadTodos($e);
   }
 }

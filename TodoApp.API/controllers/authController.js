@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
         .send({ message: false, error: "User already registered" });
 
     const hashedPassword = await bcrypt.hash(req.body.Password, 10);
-    console.log("req", req.body);
+
     const user = await User.create({
       Firstname: req.body.FirstName,
       Lastname: req.body.LastName,
@@ -37,7 +37,6 @@ exports.login = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    console.log(process.env.SECRET_KEY)
 
     const user = await User.findOne({ where: { Email: req.body.Email } });
     if (user && (await bcrypt.compare(req.body.Password, user.Password))) {

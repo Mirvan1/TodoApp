@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -12,9 +12,15 @@ export class TodoService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllTodos(): Observable<Todo[]> {
+  getAllTodos(status?:number): Observable<Todo[]> {
+    let params = new HttpParams();
+
+    if (status) {
+      params = params.append('status', status);
+    }
+    
     return this.httpClient
-      .get<Todo[]>(`${this.apiUrl}`)
+      .get<Todo[]>(`${this.apiUrl}`, { params })
       .pipe(map((x) => x as Todo[]));
   }
 

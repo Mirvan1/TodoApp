@@ -49,7 +49,7 @@ export class LoginComponent {
 
   onLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+
       const request: LoginRequest = {
         Email: this.loginForm.get('email')?.value,
         Password: this.loginForm.get('password')?.value,
@@ -57,7 +57,6 @@ export class LoginComponent {
       this.service.login(request).subscribe({
         next: (res) => {
           if (res.token) {
-             console.log("asdasdas")
             this.router.navigateByUrl('/todo');
 
             this.snackBar.open('Logged in Succesfully', 'Close', {
@@ -75,8 +74,6 @@ export class LoginComponent {
           );
         },
       });
-    } else {
-      console.log('Form is not valid');
-    }
+    } 
   }
 }

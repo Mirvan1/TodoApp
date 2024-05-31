@@ -17,6 +17,15 @@
   <button mat-raised-button color="primary" (click)="openAddEditDialog()">
     Add Todo
   </button>
+
+  <mat-button-toggle-group class="todo-filters" value=""   (change)="onFilterChange($event.value)" aria-label="Font Style">
+    <mat-button-toggle value="">All</mat-button-toggle>
+    <mat-button-toggle value="1">New</mat-button-toggle>
+    <mat-button-toggle value="2">In Progress</mat-button-toggle>
+    <mat-button-toggle value="3">Done</mat-button-toggle>
+  </mat-button-toggle-group>
+
+
   <h2 class="todo-user-content">{{authService.getFullName()}}'s Todos</h2>
 
 </div>
@@ -39,7 +48,7 @@
 
       <mat-card-actions align="end">
         <button mat-button (click)="openAddEditDialog(todo)">Edit</button>
-        <button mat-button color="warn" (click)="openConfirmDialog(todo.Id!)">
+        <button mat-button color="warn" (click)="openConfirmDialog(todo.Id)">
           Delete
         </button>
       </mat-card-actions>
