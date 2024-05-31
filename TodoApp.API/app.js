@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const sequelize = require('./config/database');
+const sequelize = require('./config/config');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const exceptionMiddleware = require('./middlewares/exceptionMiddleware');
