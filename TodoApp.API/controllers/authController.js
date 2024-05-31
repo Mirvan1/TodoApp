@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
           email: user.Email,
           username: user.Firstname,
         },
-        process.env.SECRET_KEY,
+        'secret',
         { expiresIn: "1h" }
       );
       res
