@@ -81,7 +81,7 @@ web_modules/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+#dist
 
 # Gatsby files
 .cache/
@@ -113,7 +113,7 @@ Thumbs.db
 # See https://github.com/angular/angular/blob/main/.gitignore
 
 # Angular artifacts
-dist/
+#dist/
 tmp/
 out-tsc/
 
