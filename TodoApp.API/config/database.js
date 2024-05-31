@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-// Set up the connection
+//Set up the connection
 // const sequelize = new Sequelize('ToDoDB', 'postgres', '12345', {
 //     host: 'localhost',
 //     dialect: 'postgres',
