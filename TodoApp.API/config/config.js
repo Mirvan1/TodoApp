@@ -35,9 +35,9 @@ const {sequelize} = new Sequelize(process.env.DATABASE_URL, {
     logging: true  // Optional: for debugging SQL queries
 });
 
-sequelize.authenticate()
-    .then(() => console.log('Connection has been established successfully.'))
-    .catch(err => console.error('Unable to connect to the database:', err));
+// sequelize.authenticate()
+//     .then(() => console.log('Connection has been established successfully.'))
+//     .catch(err => console.error('Unable to connect to the database:', err));
 
 
     
