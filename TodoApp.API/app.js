@@ -22,13 +22,11 @@ app.use(rateLimit({
 app.use(bodyParser.json());
 app.use(cors());
 
-// Test database connection
 sequelize.authenticate()
     .then(() => console.log('Database connected successfully.'))
     .catch(err => console.error('Unable to connect to the database:', err));
 
 
-// Require route modules
 const authRoutes = require('./routes/authRoutes');
 
 const todoRoutes = require('./routes/todoRoutes');
