@@ -4,11 +4,13 @@ const sequelize = require('./config/database');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const exceptionMiddleware = require('./middlewares/exceptionMiddleware');
+const path = require('path');
 
 const cors = require('cors');
 
 const app = express();
 require('dotenv').config();
+app.set('trust proxy', 1);
 
 
 app.use(helmet());
@@ -31,12 +33,15 @@ const authRoutes = require('./routes/authRoutes');
 
 const todoRoutes = require('./routes/todoRoutes');
 
+app.use(express.static(path.join(__dirname, 'TodoApp.UI/dist/TodoApp.UI/index.html')));
 
 app.use('/auth', authRoutes);
 app.use('/todo', todoRoutes);
 app.use(exceptionMiddleware); 
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'TodoApp.UI/dist/TodoApp.UI/index.html'));
+});
 // Server configuration
 console.log(process.env.PORT)
 const PORT = process.env.PORT || 3000;
