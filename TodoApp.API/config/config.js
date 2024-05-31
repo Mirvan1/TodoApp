@@ -28,7 +28,7 @@ console.log("Sequelize configuration:", JSON.stringify({
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
-    dialect: 'postgres',
+    dialect: "postgres",
     port: process.env.DB_PORT,
     dialectOptions: {
         ssl: {
