@@ -6843,7 +6843,7 @@ var _TodoComponent = class _TodoComponent {
     dialogRef.afterClosed().subscribe({
       next: (res) => {
         if (res) {
-          this.loadTodos(this.selectedFilter);
+          this.loadTodos();
         }
       },
       error: (err) => {

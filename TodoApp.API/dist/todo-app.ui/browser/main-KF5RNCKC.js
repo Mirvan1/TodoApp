@@ -59,7 +59,7 @@ var routes = [
   },
   {
     path: "todo",
-    loadComponent: () => import("./chunk-FGMQTXKY.js").then((m) => m.TodoComponent),
+    loadComponent: () => import("./chunk-F3QMOU3N.js").then((m) => m.TodoComponent),
     canActivate: [authGuard]
   }
 ];
