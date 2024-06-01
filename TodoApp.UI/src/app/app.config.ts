@@ -21,6 +21,7 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     provideHttpClient(withInterceptorsFromDi()),
-    importProvidersFrom(MatNativeDateModule), // here
+    importProvidersFrom(MatNativeDateModule),
+    
   ],
 };
