@@ -100,7 +100,7 @@ export class TodoComponent{
     dialogRef.afterClosed().subscribe({
       next: (res: any) => {
         if (res) {
-          this.loadTodos(this.selectedFilter);
+          this.loadTodos();
         }
       },
       error: (err: any) => {},
