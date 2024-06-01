@@ -40,13 +40,14 @@ exports.login = async (req, res) => {
 
     const user = await User.findOne({ where: { Email: req.body.Email } });
     if (user && (await bcrypt.compare(req.body.Password, user.Password))) {
+      console.log(process.env.SECRET_KEY)
       const token = jwt.sign(
         {
           userId: user.Id,
           email: user.Email,
           username: user.Firstname,
         },
-        'secret',
+        process.env.SECRET_KEY,
         { expiresIn: "1h" }
       );
       res
